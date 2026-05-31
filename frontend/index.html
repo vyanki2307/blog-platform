@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BlogSpace</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <h2 class="logo" onclick="showPage('home')">BlogSpace</h2>
+    <div class="nav-links">
+      <button onclick="showPage('home')" class="nav-btn">Home</button>
+      <button id="write-btn" onclick="showPage('write')" class="nav-btn" style="display:none">Write Post</button>
+      <button id="my-posts-btn" onclick="showPage('myposts')" class="nav-btn" style="display:none">My Posts</button>
+    </div>
+    <div class="nav-right">
+      <span id="nav-username"></span>
+      <button id="logout-btn" onclick="logout()" class="logout-btn" style="display:none">Logout</button>
+      <button id="login-nav-btn" onclick="showPage('auth')" class="login-btn">Login</button>
+    </div>
+  </nav>
+
+  <!-- AUTH PAGE -->
+  <div id="auth-page" class="page">
+    <div class="auth-box">
+      <h2>Welcome to BlogSpace</h2>
+      <div class="auth-tabs">
+        <button class="tab-btn active" onclick="showAuthTab('login')">Login</button>
+        <button class="tab-btn" onclick="showAuthTab('register')">Register</button>
+      </div>
+      <div id="login-tab">
+        <input id="login-email" type="email" placeholder="Email"/>
+        <input id="login-password" type="password" placeholder="Password"/>
+        <button class="primary-btn" onclick="login()">Login</button>
+        <p id="login-msg"></p>
+      </div>
+      <div id="register-tab" style="display:none">
+        <input id="reg-username" type="text" placeholder="Username"/>
+        <input id="reg-email" type="email" placeholder="Email"/>
+        <input id="reg-password" type="password" placeholder="Password"/>
+        <button class="primary-btn" onclick="register()">Register</button>
+        <p id="register-msg"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- HOME PAGE -->
+  <div id="home-page" class="page" style="display:none">
+    <div class="hero-banner">
+      <h1>Stories that matter</h1>
+      <p>Read, write, and connect with great minds</p>
+    </div>
+    <div class="filter-bar">
+      <input id="search-input" type="text" placeholder="Search posts..." oninput="filterPosts()"/>
+      <select id="category-filter" onchange="filterPosts()">
+        <option value="all">All Categories</option>
+        <option value="technology">Technology</option>
+        <option value="lifestyle">Lifestyle</option>
+        <option value="travel">Travel</option>
+        <option value="food">Food</option>
+        <option value="health">Health</option>
+        <option value="general">General</option>
+      </select>
+    </div>
+    <div id="posts-list" class="posts-list"></div>
+  </div>
+
+  <!-- WRITE POST PAGE -->
+  <div id="write-page" class="page" style="display:none">
+    <div class="write-container">
+      <h2 id="write-title">Write New Post</h2>
+      <input id="post-title" type="text" placeholder="Post Title"/>
+      <div class="write-meta">
+        <select id="post-category">
+          <option value="technology">Technology</option>
+          <option value="lifestyle">Lifestyle</option>
+          <option value="travel">Travel</option>
+          <option value="food">Food</option>
+          <option value="health">Health</option>
+          <option value="general">General</option>
+        </select>
+        <input id="post-tags" type="text" placeholder="Tags (e.g. javascript, web)"/>
+      </div>
+      <textarea id="post-content" placeholder="Write your story here..."></textarea>
+      <div class="write-actions">
+        <button class="primary-btn" onclick="submitPost()">Publish Post</button>
+        <button class="secondary-btn" onclick="showPage('home')">Cancel</button>
+      </div>
+      <p id="post-msg"></p>
+    </div>
+  </div>
+
+  <!-- MY POSTS PAGE -->
+  <div id="myposts-page" class="page" style="display:none">
+    <div class="page-header">
+      <h2>My Posts</h2>
+    </div>
+    <div id="my-posts-list" class="posts-list"></div>
+  </div>
+
+  <!-- SINGLE POST PAGE -->
+  <div id="post-page" class="page" style="display:none">
+    <div class="post-container">
+      <button class="back-btn" onclick="showPage('home')">← Back</button>
+      <div id="single-post"></div>
+      <div class="comments-section">
+        <h3>Comments</h3>
+        <div id="comment-form" style="display:none">
+          <textarea id="comment-input" placeholder="Write a comment..."></textarea>
+          <button class="primary-btn" onclick="addComment()">Post Comment</button>
+          <p id="comment-msg"></p>
+        </div>
+        <p id="comment-login-msg" style="display:none">
+          <a onclick="showPage('auth')" style="color:#00b894;cursor:pointer">Login to comment</a>
+        </p>
+        <div id="comments-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
