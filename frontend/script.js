@@ -1,4 +1,4 @@
-const API = 'http://localhost:5000';
+const API = 'https://blog-platform-backend-x9h1.onrender.com';
 let allPosts = [];
 let currentPostId = null;
 let editingPostId = null;
